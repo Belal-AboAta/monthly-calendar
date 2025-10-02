@@ -1,11 +1,9 @@
 export interface EventFormDialogProps {
   isOpen: boolean;
-  onClose?: any;
+  onClose?: () => void;
   date: Date;
   isEdit: boolean;
-  name?: string | number;
-  startTime?: Date;
-  endTime?: Date;
+  eventId?: string;
 }
 
 export interface CalendarEventType {

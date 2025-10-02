@@ -6,10 +6,18 @@ import { PencilIcon, TrashIcon } from "lucide-react";
 export const CalendarEvent: React.FC<CalendarEventProps> = ({
   calendarEvent,
   toggleDeleteCalendarEventDialog,
+  toggleEditCalendarEventDialog,
   setEventId,
 }) => {
   const toggleDeleteDialog = () => {
     toggleDeleteCalendarEventDialog(true);
+    if (calendarEvent.id) {
+      setEventId(calendarEvent.id);
+    }
+  };
+
+  const toggleEditDialog = () => {
+    toggleEditCalendarEventDialog(true);
     if (calendarEvent.id) {
       setEventId(calendarEvent.id);
     }
@@ -20,7 +28,7 @@ export const CalendarEvent: React.FC<CalendarEventProps> = ({
         <p>{calendarEvent.name}</p>
       </div>
       <div className="flex flex-row gap-2">
-        <Button variant="default" size="xs">
+        <Button variant="default" size="xs" onClick={toggleEditDialog}>
           <PencilIcon />
         </Button>
 

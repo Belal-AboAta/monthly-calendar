@@ -6,6 +6,7 @@ export interface CalendarEventProps {
   toggleDeleteCalendarEventDialog: React.Dispatch<
     React.SetStateAction<boolean>
   >;
+  toggleEditCalendarEventDialog: React.Dispatch<React.SetStateAction<boolean>>;
   setEventId: React.Dispatch<React.SetStateAction<string>>;
 }
 

@@ -4,12 +4,16 @@ import { useState } from "react";
 import type { CalendarEventsProps } from "@/types/CalendarEventsTypes";
 import { CalendarEvent } from "./CalendarEvent";
 import { DeleteCalendarEventDailog } from "../DeleteCalendarEventDialog";
+import { EventFormDialog } from "../EventFromDialog";
 
 export const CalendarEvents: React.FC<CalendarEventsProps> = ({
   calendarEvents,
   date,
 }) => {
   const [isDeleteCalendarEventDailogOpen, toggleDeleteCalendarEventDialog] =
+    useState<boolean>(false);
+
+  const [isEditCalendarEventDialogOpen, toggleEditCalendarEventDialog] =
     useState<boolean>(false);
 
   const [selectedEventId, setSelectedEventId] = useState("");
@@ -23,6 +27,7 @@ export const CalendarEvents: React.FC<CalendarEventsProps> = ({
               key={event.id}
               calendarEvent={event}
               toggleDeleteCalendarEventDialog={toggleDeleteCalendarEventDialog}
+              toggleEditCalendarEventDialog={toggleEditCalendarEventDialog}
               setEventId={setSelectedEventId}
             />
           ))}
@@ -31,6 +36,13 @@ export const CalendarEvents: React.FC<CalendarEventsProps> = ({
         isOpen={isDeleteCalendarEventDailogOpen}
         onClose={() => toggleDeleteCalendarEventDialog(false)}
         date={date}
+        eventId={selectedEventId}
+      />
+      <EventFormDialog
+        isOpen={isEditCalendarEventDialogOpen}
+        date={date}
+        isEdit={true}
+        onClose={() => toggleEditCalendarEventDialog(false)}
         eventId={selectedEventId}
       />
     </>

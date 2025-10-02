@@ -26,18 +26,21 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { cn, setCalendarEventInLocalStorage } from "@/lib/utils";
+import {
+  cn,
+  getCalendarEventByEventId,
+  setCalendarEventInLocalStorage,
+  updateCalendarEventInLocalStorage,
+} from "@/lib/utils";
 import { useCalendarEventFlagContext } from "@/context/CalendarEventFlagContext";
+import { useEffect } from "react";
 
 export const EventFormDialog: React.FC<EventFormDialogProps> = ({
   isOpen,
   onClose,
   date,
   isEdit,
-  name,
-  startTime,
-  endTime,
-  setChangeFlag,
+  eventId,
 }) => {
   const { toggleFlag } = useCalendarEventFlagContext();
 
@@ -60,6 +63,17 @@ export const EventFormDialog: React.FC<EventFormDialogProps> = ({
     });
   };
 
+  useEffect(() => {
+    if (isEdit && eventId) {
+      const event = getCalendarEventByEventId(date, eventId);
+      if (event) {
+        form.setValue("name", event.name);
+        form.setValue("startTime", event.startTime);
+        form.setValue("endTime", event.endTime);
+      }
+    }
+  }, [isEdit, eventId, date, form]);
+
   const handleSubmit = () => {
     form.trigger(["name", "startTime", "endTime"]);
     if (form.formState.isValid) {
@@ -69,18 +83,19 @@ export const EventFormDialog: React.FC<EventFormDialogProps> = ({
         startTime,
         endTime,
       };
-      setCalendarEventInLocalStorage(date, event);
-      if (toggleFlag) {
-        toggleFlag((flag) => !flag);
+      if (isEdit && eventId) {
+        updateCalendarEventInLocalStorage(date, eventId, event);
+      } else {
+        setCalendarEventInLocalStorage(date, event);
       }
+      toggleFlag?.((flag) => !flag);
       resetForm();
-      onClose();
+      onClose?.();
     }
   };
 
   const onOpenChange = () => {
-    resetForm();
-    onClose();
+    onClose?.();
   };
 
   return (
@@ -192,7 +207,7 @@ export const EventFormDialog: React.FC<EventFormDialogProps> = ({
               <Button variant="destructive">Cancel</Button>
             </DialogClose>
             <Button type="submit" onClick={handleSubmit}>
-              Save changes
+              {isEdit ? "Update changes" : "Save changes"}
             </Button>
           </DialogFooter>
         </DialogContent>

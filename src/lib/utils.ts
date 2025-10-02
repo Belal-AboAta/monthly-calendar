@@ -54,12 +54,13 @@ export function getCalendarEventsFromLocalStorage(
 export function setCalendarEventInLocalStorage(
   date: Date,
   event: CalendarEventType,
+  eventId?: string,
 ) {
   const key = getCalendarEventKeyFromDate(date);
   const isEventsExist = localStorage.getItem(key);
   const newEvent = {
     ...event,
-    id: uuidv4(),
+    id: eventId ? eventId : uuidv4(),
   };
 
   if (isEventsExist) {
@@ -69,6 +70,23 @@ export function setCalendarEventInLocalStorage(
   } else {
     localStorage.setItem(key, JSON.stringify([newEvent]));
   }
+}
+
+export function getCalendarEventByEventId(
+  date: Date,
+  eventId: string,
+): CalendarEventType | undefined {
+  const events = getCalendarEventsFromLocalStorage(date);
+  return events?.find((event) => event.id === eventId);
+}
+
+export function updateCalendarEventInLocalStorage(
+  date: Date,
+  eventId: string,
+  event: CalendarEventType,
+) {
+  deleteCalendarEventInLocalStorage(date, eventId);
+  setCalendarEventInLocalStorage(date, event, eventId);
 }
 
 export function deleteCalendarEventInLocalStorage(date: Date, eventId: string) {

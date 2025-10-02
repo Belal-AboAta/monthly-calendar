@@ -1,5 +1,8 @@
-import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { clsx, type ClassValue } from "clsx";
+import { v4 as uuidv4 } from "uuid";
+
+import type { CalendarEventType } from "@/types/EventFormTypes";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -27,4 +30,50 @@ export function isDateToday(date: Date) {
   const isSameMonth = date.getMonth() === today.getMonth();
   const isSameDay = date.getDate() === today.getDate();
   return isSameYear && isSameMonth && isSameDay;
+}
+
+// Will use local storage for simplicity
+// TODO: use api calss insteaded
+
+export function getCalendarEventKeyFromDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  const key = `${year}-${month}-${day}`;
+
+  return key;
+}
+
+export function getCalendarEventsFromLocalStorage(
+  date: Date,
+): CalendarEventType[] | null {
+  const key = getCalendarEventKeyFromDate(date);
+  const events = localStorage.getItem(key);
+  return events ? JSON.parse(events) : null;
+}
+export function setCalendarEventInLocalStorage(
+  date: Date,
+  event: CalendarEventType,
+) {
+  const key = getCalendarEventKeyFromDate(date);
+  const isEventsExist = localStorage.getItem(key);
+  const newEvent = {
+    ...event,
+    id: uuidv4(),
+  };
+
+  if (isEventsExist) {
+    const events: CalendarEventType[] = JSON.parse(isEventsExist);
+    events.push(newEvent);
+    localStorage.setItem(key, JSON.stringify(events));
+  } else {
+    localStorage.setItem(key, JSON.stringify([newEvent]));
+  }
+}
+
+export function deleteCalendarEventInLocalStorage(date: Date, eventId: string) {
+  const key = getCalendarEventKeyFromDate(date);
+  const events = getCalendarEventsFromLocalStorage(date);
+  const filteredEvents = events?.filter((event) => event.id !== eventId);
+  localStorage.setItem(key, JSON.stringify(filteredEvents));
 }

@@ -1,16 +1,39 @@
-import * as React from "react";
 import { clsx } from "clsx";
-
-import type { CalendarDayPropss } from "@/types/CalendarDaysTypes";
-import { TextComponent } from "../TextComponent";
 import { PlusIcon } from "lucide-react";
-import { Button } from "../ui/button";
+import * as React from "react";
+import { useEffect, useState } from "react";
 
-export const CalendarDay: React.FC<CalendarDayPropss> = ({ day }) => {
+import { getCalendarEventsFromLocalStorage } from "@/lib/utils";
+import type { CalendarDayPropss } from "@/types/CalendarDaysTypes";
+import { CalendarEvents } from "../CalendarEvents";
+import { TextComponent } from "../TextComponent";
+import { Button } from "../ui/button";
+import { useCalendarEventFlagContext } from "@/context/CalendarEventFlagContext";
+
+export const CalendarDay: React.FC<CalendarDayPropss> = ({
+  day,
+  openDialog,
+  setSelectedDate,
+}) => {
+  const hanldeOpenEventDailog = () => {
+    setSelectedDate(day.date);
+    openDialog(true);
+  };
+
+  const { flag } = useCalendarEventFlagContext();
+
+  const [calendarEvents, setCalendarEvents] = useState(
+    getCalendarEventsFromLocalStorage(day.date),
+  );
+
+  useEffect(() => {
+    setCalendarEvents(getCalendarEventsFromLocalStorage(day.date));
+  }, [flag, day.date]);
+
   return (
     <div
       className={clsx(
-        "h-56 flex items-center justify-center w-full border border-gray-500 relative",
+        "h-56 flex flex-col w-full border border-gray-500 relative p-4 hover:[&_button]:block",
         day.currentDay
           ? "bg-green-300"
           : day.currentMonth
@@ -18,13 +41,18 @@ export const CalendarDay: React.FC<CalendarDayPropss> = ({ day }) => {
             : "bg-gray-400",
       )}
     >
-      <Button size="sm" className="absolute top-2 right-2">
-        <PlusIcon />
-      </Button>
-      <TextComponent
-        text={day.number}
-        className="font-bold text-gray-50 text-center"
-      />
+      <div className="min-h-8 flex justify-between items-center w-full self-start">
+        <TextComponent
+          text={day.number}
+          className="font-bold text-gray-50 text-center"
+        />
+        <Button size="sm" className="hidden" onClick={hanldeOpenEventDailog}>
+          <PlusIcon />
+        </Button>
+      </div>
+      {calendarEvents && calendarEvents?.length > 0 && (
+        <CalendarEvents calendarEvents={calendarEvents} date={day.date} />
+      )}
     </div>
   );
 };

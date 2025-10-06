@@ -3,7 +3,7 @@ export type onPrevType = () => void;
 export type onTodayType = () => void;
 
 export interface CalendarHeaderProps {
-  currentMonth: Date;
+  calendarText: string;
   onNext: onNextType;
   onPrev: onPrevType;
   onToday: onTodayType;

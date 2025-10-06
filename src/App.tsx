@@ -1,17 +1,31 @@
-import { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import "./App.css";
-import { CalendarHeader } from "./components/CalendarHeader";
-import { useCalendarDays } from "./components/hooks/useCalendarDays";
-import { useCurrentMonth } from "./components/hooks/useCurrentMonth";
-import { WeekDays } from "./components/WeekDays";
-import { CalendarDays } from "./components/CalendarDays";
+import { SwitchCalendarView } from "./components/SwitchCalendarView";
+import { MonthCalendarView } from "./containers/MonthCalendarView/";
 import { CalendarEventFlagContext } from "./context/CalendarEventFlagContext";
+import { CalendarViewEnum } from "./types/SwitchCalendarViewTypes";
 
 function App() {
-  const { currentMonth, onNext, onPrev, onToday } = useCurrentMonth();
-  const calendarDays = useCalendarDays(currentMonth);
   const [flag, toggleFlag] = useState(false);
+  const [view, setView] = useState<CalendarViewEnum>(CalendarViewEnum.Month);
+
+  const onViewChange = (view: CalendarViewEnum) => {
+    setView(view);
+  };
+
+  const RenderView: React.FC = useCallback(() => {
+    switch (view) {
+      case CalendarViewEnum.Day:
+        return <>Day</>;
+      case CalendarViewEnum.Week:
+        return <>Week</>;
+      case CalendarViewEnum.Month:
+        return <MonthCalendarView />;
+      case CalendarViewEnum.Year:
+        return <>Year</>;
+    }
+  }, [view]);
 
   return (
     <CalendarEventFlagContext
@@ -20,14 +34,8 @@ function App() {
         toggleFlag,
       }}
     >
-      <CalendarHeader
-        currentMonth={currentMonth}
-        onNext={onNext}
-        onPrev={onPrev}
-        onToday={onToday}
-      />
-      <WeekDays />
-      <CalendarDays calendarDays={calendarDays} />
+      <SwitchCalendarView onValueChange={onViewChange} />
+      <RenderView />
     </CalendarEventFlagContext>
   );
 }

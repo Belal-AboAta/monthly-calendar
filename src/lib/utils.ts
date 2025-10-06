@@ -10,14 +10,14 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getFormatedTextFromDate(
   date: Date,
-  formatOptions: Record<string, string>,
+  formatOptions: Intl.DateTimeFormatOptions,
   local = "en-US",
 ) {
   return new Intl.DateTimeFormat(local, formatOptions).format(date);
 }
 
 export function getMonthTextFromDate(date: Date, local = "en-US") {
-  const formatOptions = {
+  const formatOptions: Intl.DateTimeFormatOptions = {
     month: "long",
     year: "numeric",
   };

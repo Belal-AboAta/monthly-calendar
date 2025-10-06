@@ -14,6 +14,7 @@ import {
   getCalendarEventsFromLocalStorage,
   getDayTextFromDate,
 } from "@/lib/utils";
+import { useCalendarEventDialog } from "@/hooks/useCalendarEventDialog";
 
 export const DayCalendarView: React.FC = () => {
   const { currentDay, onNext, onPrev, onToday } = useCurrentDay();
@@ -29,13 +30,14 @@ export const DayCalendarView: React.FC = () => {
     setCalendarEvents(getCalendarEventsFromLocalStorage(currentDay));
   }, [flag, currentDay]);
 
-  const [isDeleteCalendarEventDailogOpen, toggleDeleteCalendarEventDialog] =
-    useState<boolean>(false);
-
-  const [isEditCalendarEventDialogOpen, toggleEditCalendarEventDialog] =
-    useState<boolean>(false);
-
-  const [selectedEventId, setSelectedEventId] = useState("");
+  const {
+    isDeleteCalendarEventDailogOpen,
+    toggleDeleteCalendarEventDialog,
+    isEditCalendarEventDialogOpen,
+    toggleEditCalendarEventDialog,
+    selectedEventId,
+    setSelectedEventId,
+  } = useCalendarEventDialog();
 
   return (
     <>

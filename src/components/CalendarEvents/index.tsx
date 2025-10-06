@@ -1,22 +1,23 @@
 import * as React from "react";
-import { useState } from "react";
 
+import { useCalendarEventDialog } from "@/hooks/useCalendarEventDialog";
 import type { CalendarEventsProps } from "@/types/CalendarEventsTypes";
-import { CalendarEvent } from "./CalendarEvent";
 import { DeleteCalendarEventDailog } from "../DeleteCalendarEventDialog";
 import { EventFormDialog } from "../EventFromDialog";
+import { CalendarEvent } from "./CalendarEvent";
 
 export const CalendarEvents: React.FC<CalendarEventsProps> = ({
   calendarEvents,
   date,
 }) => {
-  const [isDeleteCalendarEventDailogOpen, toggleDeleteCalendarEventDialog] =
-    useState<boolean>(false);
-
-  const [isEditCalendarEventDialogOpen, toggleEditCalendarEventDialog] =
-    useState<boolean>(false);
-
-  const [selectedEventId, setSelectedEventId] = useState("");
+  const {
+    isDeleteCalendarEventDailogOpen,
+    toggleDeleteCalendarEventDialog,
+    isEditCalendarEventDialogOpen,
+    toggleEditCalendarEventDialog,
+    selectedEventId,
+    setSelectedEventId,
+  } = useCalendarEventDialog();
 
   return (
     <>

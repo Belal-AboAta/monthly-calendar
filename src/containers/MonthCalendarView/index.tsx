@@ -3,8 +3,8 @@ import * as React from "react";
 import { getMonthTextFromDate } from "@/lib/utils";
 import { CalendarDays } from "../../components/CalendarDays";
 import { CalendarHeader } from "../../components/CalendarHeader";
-import { useCalendarDays } from "../../components/hooks/useCalendarDays";
-import { useCurrentMonth } from "../../components/hooks/useCurrentMonth";
+import { useCalendarDays } from "../../hooks/useCalendarDays";
+import { useCurrentMonth } from "../../hooks/useCurrentMonth";
 import { WeekDays } from "../../components/WeekDays";
 
 export const MonthCalendarView: React.FC = () => {

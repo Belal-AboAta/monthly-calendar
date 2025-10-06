@@ -24,6 +24,16 @@ export function getMonthTextFromDate(date: Date, local = "en-US") {
   return getFormatedTextFromDate(date, formatOptions, local);
 }
 
+export function getDayTextFromDate(date: Date, local = "en-US") {
+  const formatOptions: Intl.DateTimeFormatOptions = {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  };
+
+  return getFormatedTextFromDate(date, formatOptions, local);
+}
+
 export function isDateToday(date: Date) {
   const today = new Date();
   const isSameYear = date.getFullYear() === today.getFullYear();

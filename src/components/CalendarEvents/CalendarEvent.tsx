@@ -1,7 +1,8 @@
-import type { CalendarEventProps } from "@/types/CalendarEventsTypes";
-import * as React from "react";
-import { Button } from "../ui/button";
 import { PencilIcon, TrashIcon } from "lucide-react";
+import * as React from "react";
+
+import type { CalendarEventProps } from "@/types/CalendarEventsTypes";
+import { Button } from "../ui/button";
 
 export const CalendarEvent: React.FC<CalendarEventProps> = ({
   calendarEvent,
@@ -23,7 +24,7 @@ export const CalendarEvent: React.FC<CalendarEventProps> = ({
     }
   };
   return (
-    <div className="bg-gray-500 flex flex-row items-center justify-between overflow-hidden px-4 py-8 min-h-10 rounded-md">
+    <div className="bg-gray-500 flex flex-row items-center justify-between overflow-hidden px-4 py-8 min-h-10 rounded-md h-full">
       <div>
         <p>{calendarEvent.name}</p>
       </div>

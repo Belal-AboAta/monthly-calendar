@@ -5,6 +5,7 @@ import { SwitchCalendarView } from "./components/SwitchCalendarView";
 import { MonthCalendarView } from "./containers/MonthCalendarView/";
 import { CalendarEventFlagContext } from "./context/CalendarEventFlagContext";
 import { CalendarViewEnum } from "./types/SwitchCalendarViewTypes";
+import { DayCalendarView } from "./containers/DayCalendarView";
 
 function App() {
   const [flag, toggleFlag] = useState(false);
@@ -17,7 +18,7 @@ function App() {
   const RenderView: React.FC = useCallback(() => {
     switch (view) {
       case CalendarViewEnum.Day:
-        return <>Day</>;
+        return <DayCalendarView />;
       case CalendarViewEnum.Week:
         return <>Week</>;
       case CalendarViewEnum.Month:

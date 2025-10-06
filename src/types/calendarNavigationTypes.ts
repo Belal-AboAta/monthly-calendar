@@ -1,6 +1,6 @@
 import type { onNextType, onPrevType } from "./CalendarHeaderTypes";
 
-export interface MonthNavigationProps {
+export interface CalendarNavigationProps {
   onNext: onNextType;
   onPrev: onPrevType;
 }

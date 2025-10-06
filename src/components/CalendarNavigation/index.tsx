@@ -1,10 +1,10 @@
-import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import * as React from "react";
 
-import type { MonthNavigationProps } from "@/types/monthNavigationTypes";
+import type { CalendarNavigationProps } from "@/types/calendarNavigationTypes";
 import { Button } from "../ui/button";
 
-export const MonthNavigation: React.FC<MonthNavigationProps> = ({
+export const CalendarNavigation: React.FC<CalendarNavigationProps> = ({
   onNext,
   onPrev,
 }) => {

@@ -1,9 +1,9 @@
 import * as React from "react";
 
 import type { CalendarHeaderProps } from "@/types/CalendarHeaderTypes";
+import { CalendarNavigation } from "../CalendarNavigation";
 import { TextComponent } from "../TextComponent";
 import { Button } from "../ui/button";
-import { MonthNavigation } from "../MonthNavigation";
 
 export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   calendarText,
@@ -22,7 +22,7 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
           {/* TODO: use local if needed */}
           Today
         </Button>
-        <MonthNavigation onNext={onNext} onPrev={onPrev} />
+        <CalendarNavigation onNext={onNext} onPrev={onPrev} />
       </div>
     </div>
   );

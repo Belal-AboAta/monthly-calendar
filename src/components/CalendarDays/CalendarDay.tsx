@@ -1,14 +1,12 @@
 import { clsx } from "clsx";
 import { PlusIcon } from "lucide-react";
 import * as React from "react";
-import { useEffect, useState } from "react";
 
-import { getCalendarEventsFromLocalStorage } from "@/lib/utils";
+import { useCalendarEvents } from "@/hooks/useCalenderEvents";
 import type { CalendarDayPropss } from "@/types/CalendarDaysTypes";
 import { CalendarEvents } from "../CalendarEvents";
 import { TextComponent } from "../TextComponent";
 import { Button } from "../ui/button";
-import { useCalendarEventFlagContext } from "@/context/CalendarEventFlagContext";
 
 export const CalendarDay: React.FC<CalendarDayPropss> = ({
   day,
@@ -20,15 +18,7 @@ export const CalendarDay: React.FC<CalendarDayPropss> = ({
     openDialog(true);
   };
 
-  const { flag } = useCalendarEventFlagContext();
-
-  const [calendarEvents, setCalendarEvents] = useState(
-    getCalendarEventsFromLocalStorage(day.date),
-  );
-
-  useEffect(() => {
-    setCalendarEvents(getCalendarEventsFromLocalStorage(day.date));
-  }, [flag, day.date]);
+  const { calendarEvents } = useCalendarEvents(day.date);
 
   return (
     <div

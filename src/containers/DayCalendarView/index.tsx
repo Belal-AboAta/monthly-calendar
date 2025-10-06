@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
 
 import { CalendarEvent } from "@/components/CalendarEvents/CalendarEvent";
 import { CalendarHeader } from "@/components/CalendarHeader";
@@ -7,28 +6,17 @@ import { DayTimes } from "@/components/DayTimes";
 import { DayTimesBlocks } from "@/components/DayTimesBlocks";
 import { DeleteCalendarEventDailog } from "@/components/DeleteCalendarEventDialog";
 import { EventFormDialog } from "@/components/EventFromDialog";
-import { useCalendarEventFlagContext } from "@/context/CalendarEventFlagContext";
+import { useCalendarEventDialog } from "@/hooks/useCalendarEventDialog";
+import { useCalendarEvents } from "@/hooks/useCalenderEvents";
 import { useCurrentDay } from "@/hooks/useCurrentDay";
 import { getEventPositionFromTime } from "@/lib/eventPosition";
-import {
-  getCalendarEventsFromLocalStorage,
-  getDayTextFromDate,
-} from "@/lib/utils";
-import { useCalendarEventDialog } from "@/hooks/useCalendarEventDialog";
+import { getDayTextFromDate } from "@/lib/utils";
 
 export const DayCalendarView: React.FC = () => {
   const { currentDay, onNext, onPrev, onToday } = useCurrentDay();
   const calendarText = getDayTextFromDate(currentDay);
 
-  const { flag } = useCalendarEventFlagContext();
-
-  const [calendarEvents, setCalendarEvents] = useState(
-    getCalendarEventsFromLocalStorage(currentDay),
-  );
-
-  useEffect(() => {
-    setCalendarEvents(getCalendarEventsFromLocalStorage(currentDay));
-  }, [flag, currentDay]);
+  const { calendarEvents } = useCalendarEvents(currentDay);
 
   const {
     isDeleteCalendarEventDailogOpen,

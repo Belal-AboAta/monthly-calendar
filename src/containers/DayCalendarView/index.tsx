@@ -1,3 +1,4 @@
+import { PlusIcon } from "lucide-react";
 import * as React from "react";
 
 import { CalendarEvent } from "@/components/CalendarEvents/CalendarEvent";
@@ -6,6 +7,7 @@ import { DayTimes } from "@/components/DayTimes";
 import { DayTimesBlocks } from "@/components/DayTimesBlocks";
 import { DeleteCalendarEventDailog } from "@/components/DeleteCalendarEventDialog";
 import { EventFormDialog } from "@/components/EventFromDialog";
+import { Button } from "@/components/ui/button";
 import { useCalendarEventDialog } from "@/hooks/useCalendarEventDialog";
 import { useCalendarEvents } from "@/hooks/useCalenderEvents";
 import { useCurrentDay } from "@/hooks/useCurrentDay";
@@ -19,6 +21,8 @@ export const DayCalendarView: React.FC = () => {
   const { calendarEvents } = useCalendarEvents(currentDay);
 
   const {
+    isEventDialogOpen,
+    toggleEventDialog,
     isDeleteCalendarEventDailogOpen,
     toggleDeleteCalendarEventDialog,
     isEditCalendarEventDialogOpen,
@@ -35,6 +39,14 @@ export const DayCalendarView: React.FC = () => {
         onPrev={onPrev}
         onToday={onToday}
       />
+
+      <Button
+        size="lg"
+        onClick={() => toggleEventDialog(true)}
+        className="ml-auto my-8 flex"
+      >
+        <PlusIcon />
+      </Button>
       <div className="relative mt-8">
         <div className="flex gap-4 absolute inset-0">
           <DayTimes />
@@ -81,6 +93,12 @@ export const DayCalendarView: React.FC = () => {
         isEdit={true}
         onClose={() => toggleEditCalendarEventDialog(false)}
         eventId={selectedEventId}
+      />
+      <EventFormDialog
+        isOpen={isEventDialogOpen}
+        date={currentDay}
+        isEdit={false}
+        onClose={() => toggleEventDialog(false)}
       />
     </>
   );

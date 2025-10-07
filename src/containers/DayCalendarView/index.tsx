@@ -41,7 +41,7 @@ export const DayCalendarView: React.FC = () => {
       />
 
       <Button
-        size="lg"
+        size="sm"
         onClick={() => toggleEventDialog(true)}
         className="ml-auto my-8 flex"
       >
@@ -65,7 +65,7 @@ export const DayCalendarView: React.FC = () => {
             const top = topInset * 96;
             return (
               <div
-                className="absolute left-40 right-0"
+                className="absolute left-20  md:left-40 right-0"
                 style={{ height: height, top: top }}
               >
                 <CalendarEvent

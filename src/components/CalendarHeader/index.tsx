@@ -12,14 +12,20 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   onToday,
 }) => {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center gap-4">
       <>
-        <TextComponent text={calendarText} className="min-w-2xl" />
+        <TextComponent
+          text={calendarText}
+          className="text-xs md:text-base lg:text-lg"
+        />
       </>
 
       <div className="flex justify-between items-center max-w-2xl gap-2">
-        <Button onClick={onToday}>
-          {/* TODO: use local if needed */}
+        <Button
+          onClick={onToday}
+          size="sm"
+          className="text-xs md:text-base lg:text-lg"
+        >
           Today
         </Button>
         <CalendarNavigation onNext={onNext} onPrev={onPrev} />

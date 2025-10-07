@@ -61,6 +61,14 @@ export function getDayTextFromDate(date: Date, local = "en-US") {
   return getFormatedTextFromDate(date, formatOptions, local);
 }
 
+export function getWeekDayFromDate(date: Date, local = "en-US") {
+  const formatOptions: Intl.DateTimeFormatOptions = {
+    weekday: "short",
+  };
+
+  return getFormatedTextFromDate(date, formatOptions, local);
+}
+
 export function isDateToday(date: Date) {
   const today = new Date();
   const isSameYear = date.getFullYear() === today.getFullYear();

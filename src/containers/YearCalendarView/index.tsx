@@ -17,7 +17,7 @@ export const YearCalendarView: React.FC = () => {
         onPrev={onPrev}
         onToday={onToday}
       />
-      <div className="grid grid-rows-3 grid-cols-4 gap-16 mt-8">
+      <div className="grid md:grid-rows-6 md:grid-cols-2 lg:grid-rows-3 lg:grid-cols-4 gap-16 mt-8">
         {Array.from({ length: 12 }, (_, i) => i).map((month) => {
           return (
             <YearViewMonth

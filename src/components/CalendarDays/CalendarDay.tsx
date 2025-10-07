@@ -7,6 +7,7 @@ import type { CalendarDayPropss } from "@/types/CalendarDaysTypes";
 import { CalendarEvents } from "../CalendarEvents";
 import { TextComponent } from "../TextComponent";
 import { Button } from "../ui/button";
+import { getWeekDayFromDate } from "@/lib/utils";
 
 export const CalendarDay: React.FC<CalendarDayPropss> = ({
   day,
@@ -19,6 +20,7 @@ export const CalendarDay: React.FC<CalendarDayPropss> = ({
   };
 
   const { calendarEvents } = useCalendarEvents(day.date);
+  const weekDay = getWeekDayFromDate(day.date);
 
   return (
     <div
@@ -39,6 +41,7 @@ export const CalendarDay: React.FC<CalendarDayPropss> = ({
         <Button size="sm" className="hidden" onClick={hanldeOpenEventDailog}>
           <PlusIcon />
         </Button>
+        <TextComponent text={weekDay} className="block 2xl:hidden" />
       </div>
       {calendarEvents && calendarEvents?.length > 0 && (
         <CalendarEvents calendarEvents={calendarEvents} date={day.date} />

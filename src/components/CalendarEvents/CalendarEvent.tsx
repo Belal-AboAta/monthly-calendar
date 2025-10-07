@@ -3,6 +3,7 @@ import * as React from "react";
 
 import type { CalendarEventProps } from "@/types/CalendarEventsTypes";
 import { Button } from "../ui/button";
+import { TextComponent } from "../TextComponent";
 
 export const CalendarEvent: React.FC<CalendarEventProps> = ({
   calendarEvent,
@@ -24,9 +25,14 @@ export const CalendarEvent: React.FC<CalendarEventProps> = ({
     }
   };
   return (
-    <div className="bg-gray-500 flex flex-row items-center justify-between overflow-hidden px-4 py-8 min-h-10 rounded-md h-full">
+    <div className="bg-gray-500 flex flex-row gap-4 items-center justify-between overflow-hidden px-2 2xl:px-4 py-2 2xl:py-8 min-h-10 rounded-md h-full max-w-full">
       <div>
-        <p>{calendarEvent.name}</p>
+        <TextComponent
+          text={calendarEvent.name}
+          className="text-xs"
+          isTrancated={true}
+          maxLength={9}
+        />
       </div>
       <div className="flex flex-row gap-2">
         <Button variant="default" size="xs" onClick={toggleEditDialog}>

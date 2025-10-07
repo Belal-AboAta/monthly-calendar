@@ -30,12 +30,12 @@ export const DayTimes: React.FC = () => {
   ];
 
   return (
-    <div className="w-32">
+    <div className="w-16 md:w-32">
       {DAY_TIMES.map((time) => (
         <TextComponent
           key={time}
           text={time}
-          className="h-24 flex items-end justify-center p-0 m-0 leading-0"
+          className="h-24 flex items-end justify-center p-0 m-0 leading-0 text-xs md:text-base lg:text-lg"
         />
       ))}
     </div>

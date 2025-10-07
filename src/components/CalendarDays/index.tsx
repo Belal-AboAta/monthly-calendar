@@ -14,7 +14,7 @@ export const CalendarDays: React.FC<CalenderDaysProps> = ({ calendarDays }) => {
   } = useCalendarEventDialog();
   return (
     <>
-      <div className="w-full grid grid-cols-7 grid-rows-6 justify-center items-center">
+      <div className="w-full grid lg:grid-cols-4 lg:grid-rows-6 2xl:grid-cols-7 2xl:grid-rows-6 justify-center items-center mt-8 2xl:mt-0">
         {calendarDays.map((calendarDay) => (
           <CalendarDay
             key={calendarDay.date.getTime()}

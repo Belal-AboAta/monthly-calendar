@@ -21,7 +21,7 @@ export const CalendarEvents: React.FC<CalendarEventsProps> = ({
 
   return (
     <>
-      <div className="min-h-4/5 flex flex-col gap-2 overflow-y-auto mt-2 px-2">
+      <div className="min-h-4/5 flex flex-col gap-2 overflow-y-auto mt-2 px-0 2xl:px-2">
         {calendarEvents.length &&
           calendarEvents.map((event) => (
             <CalendarEvent

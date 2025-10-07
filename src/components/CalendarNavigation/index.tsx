@@ -10,10 +10,10 @@ export const CalendarNavigation: React.FC<CalendarNavigationProps> = ({
 }) => {
   return (
     <div className="inline-flex justify-center items-center gap-3">
-      <Button onClick={onPrev}>
+      <Button onClick={onPrev} size="sm">
         <ChevronLeft />
       </Button>
-      <Button onClick={onNext}>
+      <Button onClick={onNext} size="sm">
         <ChevronRight />
       </Button>
     </div>

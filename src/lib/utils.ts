@@ -1,6 +1,8 @@
 import { twMerge } from "tailwind-merge";
 import { clsx, type ClassValue } from "clsx";
 import { v4 as uuidv4 } from "uuid";
+import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
 
 import type { CalendarEventType } from "@/types/EventFormTypes";
 
@@ -22,6 +24,16 @@ export function getMonthTextFromDate(date: Date, local = "en-US") {
     year: "numeric",
   };
   return getFormatedTextFromDate(date, formatOptions, local);
+}
+
+export function getWeekTextFromDate(date: Date, local = "en-US") {
+  const formatOptions: Intl.DateTimeFormatOptions = {
+    month: "long",
+    year: "numeric",
+  };
+  const formatedDate = getFormatedTextFromDate(date, formatOptions, local);
+  dayjs.extend(weekOfYear);
+  return `Week ${dayjs(date).week()}, ${formatedDate}`;
 }
 
 export function getDayTextFromDate(date: Date, local = "en-US") {

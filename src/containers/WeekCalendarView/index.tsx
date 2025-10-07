@@ -5,11 +5,11 @@ import { CalendarHeader } from "@/components/CalendarHeader";
 import { WeekDays } from "@/components/WeekDays";
 import { useCurrentWeek } from "@/hooks/useCurrentWeek";
 import { useWeekCalendarDays } from "@/hooks/useWeekCalendarDays";
-import { getDayTextFromDate } from "@/lib/utils";
+import { getWeekTextFromDate } from "@/lib/utils";
 
 export const WeekCalendarView: React.FC = () => {
   const { currentWeek, onNext, onPrev, onToday } = useCurrentWeek();
-  const calendarText = getDayTextFromDate(currentWeek);
+  const calendarText = getWeekTextFromDate(currentWeek);
   const calendarDays = useWeekCalendarDays(currentWeek);
 
   return (

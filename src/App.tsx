@@ -2,10 +2,11 @@ import React, { useCallback, useState } from "react";
 
 import "./App.css";
 import { SwitchCalendarView } from "./components/SwitchCalendarView";
+import { DayCalendarView } from "./containers/DayCalendarView";
 import { MonthCalendarView } from "./containers/MonthCalendarView/";
+import { WeekCalendarView } from "./containers/WeekCalendarView";
 import { CalendarEventFlagContext } from "./context/CalendarEventFlagContext";
 import { CalendarViewEnum } from "./types/SwitchCalendarViewTypes";
-import { DayCalendarView } from "./containers/DayCalendarView";
 
 function App() {
   const [flag, toggleFlag] = useState(false);
@@ -20,7 +21,7 @@ function App() {
       case CalendarViewEnum.Day:
         return <DayCalendarView />;
       case CalendarViewEnum.Week:
-        return <>Week</>;
+        return <WeekCalendarView />;
       case CalendarViewEnum.Month:
         return <MonthCalendarView />;
       case CalendarViewEnum.Year:

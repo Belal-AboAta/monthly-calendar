@@ -53,7 +53,8 @@ export const DayCalendarView: React.FC = () => {
           <DayTimesBlocks />
         </div>
 
-        {calendarEvents?.length &&
+        {calendarEvents &&
+          calendarEvents?.length > 0 &&
           calendarEvents.map((event) => {
             const { duration, topInset } = getEventPositionFromTime(
               event.startTime,

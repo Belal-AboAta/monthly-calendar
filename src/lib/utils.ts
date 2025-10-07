@@ -26,6 +26,7 @@ export function getMonthTextFromDate(date: Date, local = "en-US") {
 
 export function getDayTextFromDate(date: Date, local = "en-US") {
   const formatOptions: Intl.DateTimeFormatOptions = {
+    weekday: "long",
     day: "2-digit",
     month: "short",
     year: "numeric",

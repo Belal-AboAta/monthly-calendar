@@ -4,22 +4,22 @@ export const useCurrentWeek = () => {
   const [currentWeek, setCurrentWeek] = useState<Date>(new Date());
   const onNext = () => {
     setCurrentWeek(
-      (oldMonth) =>
+      (oldWeek) =>
         new Date(
-          oldMonth.getFullYear(),
-          oldMonth.getMonth(),
-          oldMonth.getDate() + 7,
+          oldWeek.getFullYear(),
+          oldWeek.getMonth(),
+          oldWeek.getDate() + 7,
         ),
     );
   };
 
   const onPrev = () => {
     setCurrentWeek(
-      (oldMonth) =>
+      (oldWeek) =>
         new Date(
-          oldMonth.getFullYear(),
-          oldMonth.getMonth(),
-          oldMonth.getDate() - 7,
+          oldWeek.getFullYear(),
+          oldWeek.getMonth(),
+          oldWeek.getDate() - 7,
         ),
     );
   };
